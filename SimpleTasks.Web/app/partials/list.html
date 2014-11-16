@@ -1,0 +1,55 @@
+﻿<div class="row">
+    <div class="col-md-12">
+        <h2>Tasks</h2>
+        <alert ng-repeat="alert in alerts" type="{{alert.type}}" close="closeAlert($index)">{{alert.msg}}</alert>
+        <table class="table" ng-show="user.authenticated && tasks.length > 0">
+            <thead>
+                <tr>
+                    <th>Title</th>
+                    <th>Details</th>
+                    <th>Due Date</th>
+                    <th>Completed</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="task in tasks" ng-class="{success: task.isComplete}">
+                    <td>{{task.title}}</td>
+                    <td>{{task.details}}</td>
+                    <td>{{task.dueDate | date:'dd/MM/yyyy'}}</td>
+                    <td>
+                        <span class="glyphicon glyphicon-ok" ng-show="task.isComplete"></span> 
+                        {{task.completedDateTime | date:'dd/MM/yyyy hh:mm'}}
+                    </td>
+                    <td>
+                        <a href="#/edit/{{task.id}}">Edit</a>
+                        <span ng-show="!task.isComplete">
+                            | <button class="btn-link" ng-click="completeTask(task.id)">Complete</button>
+                        </span>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+
+        <table class="table" ng-show="!user.authenticated  && tasks.length > 0">
+            <thead>
+                <tr>
+                    <th>Title</th>
+                    <th>Details</th>
+                    <th>Due Date</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="task in tasks">
+                    <td>{{task.title}}</td>
+                    <td>{{task.details}}</td>
+                    <td>{{task.dueDate | date:'dd/MM/yyyy'}}</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <p ng-show="tasks.length == 0">There are no tasks.<span ng-show="user.authenticated"> Please create a new task.</span></p>
+
+        <a href="#/create" class="btn btn-primary btn-large" ng-show="user.authenticated">Create New Task</a>
+    </div>
+</div>

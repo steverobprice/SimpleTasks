@@ -1,0 +1,7 @@
+﻿@{
+    ViewBag.Title = "Tasks";
+}
+
+<div ng-app="taskApp" ng-controller="TaskCtrl" ng-init="user={authenticated:'@Request.IsAuthenticated'}">
+    <div ng-view></div>
+</div>

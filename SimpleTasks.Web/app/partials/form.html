@@ -1,0 +1,35 @@
+﻿<alert ng-repeat="alert in alerts" type="{{alert.type}}" close="closeAlert($index)">{{alert.msg}}</alert>
+<div class="form-group">
+    <label class="control-label col-md-2" for="Title">Title</label>
+    <div class="col-md-4">
+        <input name="Title" type="text" class="form-control" ng-model="task.title" ng-required="true" placeholder="Task title">
+        <div ng-show="form.Title.$dirty && form.Title.$invalid">
+            <span ng-show="form.Title.$error.required">Please enter a task title.</span>
+        </div>
+    </div>
+</div>
+
+<div class="form-group">
+    <label class="control-label col-md-2" for="Details">Details</label>
+    <div class="col-md-4">
+        <input name="Details" type="text" class="form-control" ng-model="task.details" ng-required="true" placeholder="Task details">
+        <div ng-show="form.Details.$dirty && form.Details.$invalid">
+            <span ng-show="form.Details.$error.required">Please enter the task details.</span>
+        </div>
+    </div>
+</div>
+
+<div class="form-group">
+    <label class="control-label col-md-2" for="DueDate">Due Date</label>
+    <div class="col-md-4">
+        <p class="input-group">
+            <input name="DueDate" type="text" class="form-control" datepicker-popup="dd/MM/yyyy" ng-model="task.dueDate" is-open="opened" ng-required="true" />
+            <span class="input-group-btn">
+                <button type="button" class="btn btn-default" ng-click="openDatePopup($event)"><i class="glyphicon glyphicon-calendar"></i></button>
+            </span>
+        </p>
+        <div ng-show="form.DueDate.$dirty && form.DueDate.$invalid">
+            <span ng-show="form.DueDate.$error.required">Please enter the task due date.</span>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,25 @@
+﻿<h2>Edit task {{task.id}}</h2>
+
+<form name="form" ng-submit="editTask()" novalidate>
+    <div class="form-horizontal">
+        <hr>
+
+        <div ng-include="'app/partials/form.html'"></div>
+
+        <div class="form-group">
+            <label class="control-label col-md-2" for="Complete">Is Complete?</label>
+            <div class="col-md-4">
+                <input name="IsComplete" type="checkbox" ng-model="task.isComplete" />
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-4">
+                <input type="submit" value="Save" class="btn btn-primary btn-large" ng-disabled="form.$invalid" />
+            </div>
+        </div>
+    </div>
+</form>
+<div>
+    <a href="#/list">Back to List</a>
+</div>
