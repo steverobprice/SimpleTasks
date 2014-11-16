@@ -8,6 +8,7 @@ taskServices.factory('Task', ['$resource',
   function($resource){
       return $resource('api/task/:taskId', { taskId: '@taskId' }, {
           update: { method: 'PUT' },
-          complete: { method: 'POST', url: 'api/task/:taskId/complete' }
+          complete: { method: 'POST', url: 'api/task/:taskId/complete' },
+          delete: { method: 'DELETE' }
     });
   }]);

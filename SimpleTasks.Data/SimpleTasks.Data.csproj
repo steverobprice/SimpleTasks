@@ -46,6 +46,15 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Migrations\201411160037555_InitialCreate.cs" />
+    <Compile Include="Migrations\201411160037555_InitialCreate.Designer.cs">
+      <DependentUpon>201411160037555_InitialCreate.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201411160048091_DeletedFlag.cs" />
+    <Compile Include="Migrations\201411160048091_DeletedFlag.Designer.cs">
+      <DependentUpon>201411160048091_DeletedFlag.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Task.cs" />
     <Compile Include="Repositories\IRepository.cs" />
     <Compile Include="Repositories\Repository.cs" />
@@ -55,6 +64,14 @@
   <ItemGroup>
     <None Include="App.config" />
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\201411160037555_InitialCreate.resx">
+      <DependentUpon>201411160037555_InitialCreate.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201411160048091_DeletedFlag.resx">
+      <DependentUpon>201411160048091_DeletedFlag.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

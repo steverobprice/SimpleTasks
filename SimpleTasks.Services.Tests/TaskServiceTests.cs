@@ -377,5 +377,114 @@ namespace SimpleTasks.Services.Tests
             // Assert
             Assert.IsNull(completedTask);
         }
+
+        [TestMethod]
+        public void WhenDeletingATask_ExpectSuccess()
+        {
+            // Arrage
+            var task = new Task
+            {
+                Id = 1,
+                Title = "An outstanding task",
+                DueDate = DateTime.Today.AddDays(1)
+            };
+            _tasks = new List<Task> { 
+                task 
+            };
+
+            // Act
+            _taskService.DeleteTask(1);
+            var deletedTask = _taskService.GetById(1);
+
+            // Assert
+            Assert.IsNull(deletedTask);
+        }
+
+        [TestMethod]
+        public void WhenDeletingAnAlreadyDeletedTask_EnsureUpdateIsNotCalled()
+        {
+            // Arrage
+            var task = new Task
+            {
+                Id = 1,
+                Title = "An outstanding task",
+                DueDate = DateTime.Today.AddDays(1),
+                IsDeleted = true
+            };
+            _tasks = new List<Task> { 
+                task 
+            };
+
+            _taskRepository.Setup(m => m.Update(It.IsAny<Task>()))
+                .Verifiable();
+
+            // Act
+            _taskService.DeleteTask(1);
+
+            // Assert
+            _taskRepository.Verify(m => m.Update(It.IsAny<Task>()), Times.Never());
+        }
+
+        [TestMethod]
+        public void WhenDeletingATaskThatDoesntExist_ExpectSuccess()
+        {
+            // Arrage
+
+            // Act
+            _taskService.DeleteTask(1);
+            var deletedTask = _taskService.GetById(1);
+
+            // Assert
+            Assert.IsNull(deletedTask);
+        }
+
+        [TestMethod]
+        public void WhenGettingTasks_EnsureOnlyNotDeletedTasks()
+        {
+            // Arrage
+            _tasks = new List<Task> { 
+                new Task { Id = 1, Title = "1", DueDate = DateTime.Now, CompletedDateTime = DateTime.Now }, 
+                new Task { Id = 2, Title = "2", DueDate = DateTime.Today, IsDeleted = true }
+            };
+            _taskRepository.Setup(r => r.List()).Returns(_tasks);
+
+            // Act
+            var tasks = _taskService.GetAll();
+
+            // Assert
+            Assert.AreEqual(1, tasks.Count());
+            Assert.AreEqual(1, tasks.ElementAt(0).Id);
+        }
+
+        [TestMethod]
+        public void WhenGettingOutstadingTasks_EnsureOnlyNotDeletedTasks()
+        {
+            // Arrage
+            _tasks = new List<Task> { 
+                new Task { Id = 1, Title = "1", DueDate = DateTime.Now, CompletedDateTime = DateTime.Now }, 
+                new Task { Id = 2, Title = "2", DueDate = DateTime.Today, IsDeleted = true }
+            };
+            _taskRepository.Setup(r => r.List()).Returns(_tasks);
+
+            // Act
+            var tasks = _taskService.GetAllOutstanding();
+
+            // Assert
+            Assert.AreEqual(0, tasks.Count());
+        }
+
+        [TestMethod]
+        public void WhenGettingOutstadingTasks_WithNoTasks_EnsureSuccess()
+        {
+            // Arrage
+            _tasks = new List<Task>();
+            _taskRepository.Setup(r => r.List()).Returns(_tasks);
+
+            // Act
+            var tasks = _taskService.GetAllOutstanding();
+
+            // Assert
+            Assert.AreEqual(0, tasks.Count());
+        }
     }
 }

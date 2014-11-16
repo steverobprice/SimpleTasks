@@ -77,6 +77,16 @@ namespace SimpleTasks.Web.Controllers
         }
 
         //
+        // DELETE: /api/task/id
+        [Authorize]
+        public IHttpActionResult Delete(int id)
+        {
+            _taskService.DeleteTask(id);
+            
+            return Ok();
+        }
+
+        //
         // POST: /api/task/id/complete
         [Authorize]
         [HttpPost]

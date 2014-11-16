@@ -16,6 +16,7 @@ namespace SimpleTasks.Services
         TaskModel CreateTask(TaskModel task);
         TaskModel EditTask(TaskModel task);
         TaskModel CompleteTask(int id);
+        void DeleteTask(int id);
     }
 
     public class TaskService : ITaskService
@@ -29,19 +30,31 @@ namespace SimpleTasks.Services
 
         public IEnumerable<TaskModel> GetAll()
         {
-            var tasks = _taskRepository.List().OrderBy(t => t.DueDate);
+            var tasks = _taskRepository.List()
+                .Where(t => !t.IsDeleted)
+                .OrderBy(t => t.DueDate);
+
             return Mapper.Map<List<TaskModel>>(tasks);
         }
 
         public IEnumerable<TaskModel> GetAllOutstanding()
         {
-            var tasks = _taskRepository.List().Where(t => !t.IsComplete()).OrderBy(t => t.DueDate);
-            return Mapper.Map<List<TaskModel>>(tasks);
+            //var tasks = _taskRepository.List().Where(t => !t.IsComplete()).OrderBy(t => t.DueDate);
+            //return Mapper.Map<List<TaskModel>>(tasks);
+
+            return GetAll().Where(t => !t.IsComplete);
         }
 
         public TaskModel GetById(int id)
         {
-            return Mapper.Map<TaskModel>(_taskRepository.GetById(id));
+            var task = _taskRepository.GetById(id);
+
+            if (task != null && !task.IsDeleted)
+            {
+                return Mapper.Map<TaskModel>(task);
+            }
+
+            return null;
         }
 
         public TaskModel CreateTask(TaskModel task)
@@ -107,6 +120,18 @@ namespace SimpleTasks.Services
             }
 
             return null;
+        }
+
+        public void DeleteTask(int id)
+        {
+            var task = _taskRepository.GetById(id);
+
+            if (task != null && !task.IsDeleted)
+            {
+                task.IsDeleted = true;
+
+                _taskRepository.Update(task);
+            }
         }
     }
 }

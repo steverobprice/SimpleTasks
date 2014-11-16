@@ -13,6 +13,24 @@ taskControllers.controller('TaskCtrl', ['$scope', 'Task',
             $scope.alerts.splice(index, 1);
         };
 
+        $scope.deleteTask = function (taskId) {
+            Task.delete({ taskId: taskId }, function () {
+                $scope.alerts.push({ type: 'success', msg: 'Task deleted' });
+                $scope.tasks = Task.query();
+            }, function (error) {
+                $scope.alerts.push({ type: 'danger', msg: error.data.message });
+            });
+
+            //$scope.task = Task.get({ id: taskId }, function () {
+            //    $scope.task.$delete(function () {
+            //        $scope.alerts.push({ type: 'success', msg: 'Task deleted' });
+            //        $scope.tasks = Task.query();
+            //    }, function () {
+            //        $scope.alerts.push({ type: 'danger', msg: error.data.message });
+            //    });
+            //});
+        };
+
         $scope.completeTask = function (taskId) {
             Task.complete({ taskId: taskId }, function () {
                 $scope.alerts.push({ type: 'success', msg: 'Task completed' });
