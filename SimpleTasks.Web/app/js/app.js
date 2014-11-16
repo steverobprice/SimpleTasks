@@ -6,7 +6,8 @@ var taskApp = angular.module('taskApp', [
   'ngRoute',
   'ui.bootstrap',
   'taskControllers',
-  'taskServices'
+  'taskServices',
+  'taskFilters'
 ]);
 
 taskApp.config(['$routeProvider',
@@ -28,3 +29,9 @@ taskApp.config(['$routeProvider',
                 redirectTo: '/list'
             });
     }]);
+
+var TaskPriority = {
+    Normal: 0,
+    High: 1,
+    Low: 2
+};

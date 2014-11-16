@@ -20,6 +20,21 @@
 </div>
 
 <div class="form-group">
+    <label class="control-label col-md-2" for="Details">Priority</label>
+    <div class="col-md-4">
+        <select name="Priority" class="form-control" ng-model="task.priorityLevel" ng-required="true">
+            <option value="2">Low</option>
+            <option value="0" selected>Normal</option>
+            <option value="1">High</option>
+        </select>
+        <!--<input name="Priority" type="text" class="form-control" ng-model="task.priorityLevel" ng-required="true" placeholder="Task details">-->
+        <div ng-show="form.Details.$dirty && form.Details.$invalid">
+            <span ng-show="form.Details.$error.required">Please enter the task priority.</span>
+        </div>
+    </div>
+</div>
+
+<div class="form-group">
     <label class="control-label col-md-2" for="DueDate">Due Date</label>
     <div class="col-md-4">
         <p class="input-group">

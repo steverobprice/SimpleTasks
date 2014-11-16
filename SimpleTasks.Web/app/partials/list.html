@@ -7,6 +7,7 @@
                 <tr>
                     <th>Title</th>
                     <th>Details</th>
+                    <th>Priority</th>
                     <th>Due Date</th>
                     <th>Completed</th>
                     <th></th>
@@ -16,6 +17,7 @@
                 <tr ng-repeat="task in tasks" ng-class="{success: task.isComplete}">
                     <td>{{task.title}}</td>
                     <td>{{task.details}}</td>
+                    <td><span class="{{task.priorityLevel | priorityIcon}}"></span></td>
                     <td>{{task.dueDate | date:'dd/MM/yyyy'}}</td>
                     <td>
                         <span class="glyphicon glyphicon-ok" ng-show="task.isComplete"></span> 

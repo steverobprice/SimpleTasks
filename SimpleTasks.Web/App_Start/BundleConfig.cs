@@ -34,7 +34,8 @@ namespace SimpleTasks.Web
                       "~/Scripts/angular-ui/ui-bootstrap-tpls.js",
                       "~/app/js/app.js",
                       "~/app/js/controllers.js",
-                      "~/app/js/services.js"));
+                      "~/app/js/services.js",
+                      "~/app/js/filters.js"));
         }
     }
 }

@@ -49,6 +49,7 @@
     <Compile Include="MappingProfiles\TaskMapping.cs" />
     <Compile Include="Models\TaskExtensions.cs" />
     <Compile Include="Models\TaskModel.cs" />
+    <Compile Include="Models\TaskPriority.cs" />
     <Compile Include="TaskService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

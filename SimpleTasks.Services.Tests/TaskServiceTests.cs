@@ -265,6 +265,7 @@ namespace SimpleTasks.Services.Tests
             // Assert
             Assert.IsNull(editedTask);
         }
+
         [TestMethod]
         public void WhenEditingATask_ExpectSuccess()
         {
@@ -376,6 +377,32 @@ namespace SimpleTasks.Services.Tests
 
             // Assert
             Assert.IsNull(completedTask);
+        }
+
+        [TestMethod]
+        public void WhenEditingATaskAndChangingPriority_ExpectSuccess()
+        {
+            // Arrage
+            _tasks = new List<Task> { 
+                new Task { Id = 1, Title = "A new task", DueDate = DateTime.Now }
+            };
+            var task = new TaskModel
+            {
+                Id = 1,
+                Title = "An edited task",
+                DueDate = DateTime.Today.AddDays(1),
+                PriorityLevel = TaskPriority.High
+            };
+
+            // Act
+            var editedTask = _taskService.EditTask(task);
+
+            // Assert
+            Assert.IsNotNull(editedTask);
+            Assert.AreEqual(1, editedTask.Id);
+            Assert.AreEqual("An edited task", editedTask.Title);
+            Assert.AreEqual(DateTime.Today.AddDays(1), editedTask.DueDate);
+            Assert.AreEqual(TaskPriority.High, editedTask.PriorityLevel);
         }
     }
 }

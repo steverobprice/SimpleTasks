@@ -18,5 +18,7 @@ namespace SimpleTasks.Services.Models
 
         public DateTime? CompletedDateTime { get; set; }
         public bool IsComplete { get; set; }
+
+        public TaskPriority PriorityLevel { get; set; }
     }
 }

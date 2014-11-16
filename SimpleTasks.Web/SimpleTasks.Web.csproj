@@ -170,6 +170,7 @@
   <ItemGroup>
     <Content Include="app\js\app.js" />
     <Content Include="app\js\controllers.js" />
+    <Content Include="app\js\filters.js" />
     <Content Include="app\js\services.js" />
     <Content Include="app\partials\edit.html" />
     <Content Include="app\partials\create.html" />
