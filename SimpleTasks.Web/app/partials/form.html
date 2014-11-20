@@ -33,3 +33,13 @@
         </div>
     </div>
 </div>
+
+<div class="form-group">
+    <label class="control-label col-md-2" for="Owner">Owner</label>
+    <div class="col-md-4">
+        <input name="Owner" type="text" class="form-control" ng-model="task.owner" ng-required="true" placeholder="Task owner">
+        <div ng-show="form.Details.$dirty && form.Details.$invalid">
+            <span ng-show="form.Details.$error.required">Please enter the task owner.</span>
+        </div>
+    </div>
+</div>

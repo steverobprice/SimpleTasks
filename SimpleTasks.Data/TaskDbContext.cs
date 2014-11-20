@@ -9,7 +9,7 @@ namespace SimpleTasks.Data
         public TasksDbContext()
             : base("TasksDBConnectionString")
         {
-            Database.SetInitializer<TasksDbContext>(new CreateDatabaseIfNotExists<TasksDbContext>());
+            //Database.SetInitializer<TasksDbContext>(new CreateDatabaseIfNotExists<TasksDbContext>());
 
         }
 

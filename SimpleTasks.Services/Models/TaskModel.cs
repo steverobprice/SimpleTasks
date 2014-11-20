@@ -18,5 +18,8 @@ namespace SimpleTasks.Services.Models
 
         public DateTime? CompletedDateTime { get; set; }
         public bool IsComplete { get; set; }
+
+        [Required]
+        public string Owner { get; set; }
     }
 }

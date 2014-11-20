@@ -8,6 +8,7 @@
                     <th>Title</th>
                     <th>Details</th>
                     <th>Due Date</th>
+                    <th>Owner</th>
                     <th>Completed</th>
                     <th></th>
                 </tr>
@@ -17,6 +18,7 @@
                     <td>{{task.title}}</td>
                     <td>{{task.details}}</td>
                     <td>{{task.dueDate | date:'dd/MM/yyyy'}}</td>
+                    <td>{{task.owner}}</td>
                     <td>
                         <span class="glyphicon glyphicon-ok" ng-show="task.isComplete"></span> 
                         {{task.completedDateTime | date:'dd/MM/yyyy hh:mm'}}

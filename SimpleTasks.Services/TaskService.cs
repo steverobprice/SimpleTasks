@@ -75,6 +75,7 @@ namespace SimpleTasks.Services
                 existingTask.Title = task.Title;
                 existingTask.Details = task.Details;
                 existingTask.DueDate = task.DueDate;
+                existingTask.Owner = task.Owner;
 
                 if (task.IsComplete && !existingTask.CompletedDateTime.HasValue)
                 {

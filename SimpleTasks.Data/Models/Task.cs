@@ -9,5 +9,6 @@ namespace SimpleTasks.Data.Models
         public string Details { get; set; }
         public DateTime DueDate { get; set; }
         public DateTime? CompletedDateTime { get; set; }
+        public string Owner { get; set; }
     }
 }
